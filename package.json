@@ -1,0 +1,16 @@
+{
+  "name": "cloud-studios-community-site",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "node dev-server.js",
+    "test": "node --test",
+    "check": "node --check admin.js && node --check dev-server.js && node --check api/admin.js && node --check api/communities.js && node --check lib/admin-session.js && node --check lib/community-data.js && node --check lib/community-store.js"
+  },
+  "dependencies": {
+    "@neondatabase/serverless": "^1.0.2"
+  },
+  "engines": {
+    "node": ">=20.12"
+  }
+}

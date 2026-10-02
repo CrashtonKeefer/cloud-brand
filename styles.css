@@ -1,0 +1,585 @@
+:root {
+  color-scheme: dark;
+  font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  --background: #000;
+  --foreground: #fff;
+  --muted: #a1a1aa;
+  --border: rgb(255 255 255 / 15%);
+  --card: #262626;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  min-width: 320px;
+  background: var(--background);
+  scroll-behavior: smooth;
+}
+
+body {
+  min-width: 320px;
+  min-height: 100vh;
+  margin: 0;
+  background: var(--background);
+  color: var(--foreground);
+}
+
+button,
+a {
+  font: inherit;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.external-icon,
+.server-badge {
+  fill: none;
+  stroke: currentColor;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-width: 2;
+}
+
+.page {
+  position: relative;
+  display: flex;
+  min-height: 100vh;
+  align-items: center;
+  justify-content: center;
+  padding: 96px 24px;
+}
+
+.starfield {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.starfield::before,
+.starfield::after {
+  position: absolute;
+  inset: 0;
+  background-repeat: no-repeat;
+  content: "";
+}
+
+.starfield::before {
+  background-image:
+    radial-gradient(circle 1px at 8% 12%, rgb(255 255 255 / 78%) 95%, transparent 100%),
+    radial-gradient(circle 1px at 21% 31%, rgb(255 255 255 / 70%) 95%, transparent 100%),
+    radial-gradient(circle 1px at 39% 11%, rgb(255 255 255 / 82%) 95%, transparent 100%),
+    radial-gradient(circle 1px at 74% 15%, rgb(255 255 255 / 68%) 95%, transparent 100%),
+    radial-gradient(circle 1px at 91% 26%, rgb(255 255 255 / 78%) 95%, transparent 100%),
+    radial-gradient(circle 1px at 13% 67%, rgb(255 255 255 / 75%) 95%, transparent 100%),
+    radial-gradient(circle 1px at 83% 57%, rgb(255 255 255 / 70%) 95%, transparent 100%),
+    radial-gradient(circle 1px at 63% 83%, rgb(255 255 255 / 80%) 95%, transparent 100%),
+    radial-gradient(circle 1px at 29% 91%, rgb(255 255 255 / 70%) 95%, transparent 100%),
+    radial-gradient(circle 1px at 48% 51%, rgb(255 255 255 / 76%) 95%, transparent 100%),
+    radial-gradient(circle 1px at 3% 40%, rgb(255 255 255 / 66%) 95%, transparent 100%),
+    radial-gradient(circle 1px at 30% 3%, rgb(255 255 255 / 72%) 95%, transparent 100%),
+    radial-gradient(circle 1px at 53% 14%, rgb(255 255 255 / 76%) 95%, transparent 100%),
+    radial-gradient(circle 1px at 89% 4%, rgb(255 255 255 / 66%) 95%, transparent 100%),
+    radial-gradient(circle 1px at 96% 88%, rgb(255 255 255 / 78%) 95%, transparent 100%),
+    radial-gradient(circle 1px at 2% 26%, rgb(255 255 255 / 70%) 95%, transparent 100%),
+    radial-gradient(circle 1px at 43% 65%, rgb(255 255 255 / 75%) 95%, transparent 100%),
+    radial-gradient(circle 1px at 54% 92%, rgb(255 255 255 / 68%) 95%, transparent 100%),
+    radial-gradient(circle 1px at 76% 38%, rgb(255 255 255 / 80%) 95%, transparent 100%),
+    radial-gradient(circle 1px at 23% 79%, rgb(255 255 255 / 70%) 95%, transparent 100%);
+  animation:
+    star-twinkle 9s ease-in-out -2s infinite alternate,
+    star-drift 38s ease-in-out -12s infinite alternate;
+}
+
+.starfield::after {
+  background-image:
+    radial-gradient(circle 1.5px at 15% 42%, rgb(255 255 255 / 72%) 95%, transparent 100%),
+    radial-gradient(circle 1.5px at 34% 25%, rgb(255 255 255 / 82%) 95%, transparent 100%),
+    radial-gradient(circle 1.5px at 58% 19%, rgb(255 255 255 / 75%) 95%, transparent 100%),
+    radial-gradient(circle 1.5px at 96% 61%, rgb(255 255 255 / 70%) 95%, transparent 100%),
+    radial-gradient(circle 1.5px at 72% 73%, rgb(255 255 255 / 78%) 95%, transparent 100%),
+    radial-gradient(circle 1.5px at 5% 88%, rgb(255 255 255 / 72%) 95%, transparent 100%),
+    radial-gradient(circle 1.5px at 44% 79%, rgb(255 255 255 / 80%) 95%, transparent 100%),
+    radial-gradient(circle 1.5px at 88% 92%, rgb(255 255 255 / 74%) 95%, transparent 100%),
+    radial-gradient(circle 1.5px at 67% 42%, rgb(255 255 255 / 78%) 95%, transparent 100%),
+    radial-gradient(circle 1.5px at 26% 56%, rgb(255 255 255 / 70%) 95%, transparent 100%),
+    radial-gradient(circle 1.5px at 9% 5%, rgb(255 255 255 / 68%) 95%, transparent 100%),
+    radial-gradient(circle 1.5px at 20% 82%, rgb(255 255 255 / 74%) 95%, transparent 100%),
+    radial-gradient(circle 1.5px at 38% 45%, rgb(255 255 255 / 80%) 95%, transparent 100%),
+    radial-gradient(circle 1.5px at 64% 58%, rgb(255 255 255 / 70%) 95%, transparent 100%),
+    radial-gradient(circle 1.5px at 97% 37%, rgb(255 255 255 / 76%) 95%, transparent 100%),
+    radial-gradient(circle 1.5px at 12% 53%, rgb(255 255 255 / 68%) 95%, transparent 100%),
+    radial-gradient(circle 1.5px at 47% 31%, rgb(255 255 255 / 78%) 95%, transparent 100%),
+    radial-gradient(circle 1.5px at 71% 97%, rgb(255 255 255 / 68%) 95%, transparent 100%),
+    radial-gradient(circle 1.5px at 82% 13%, rgb(255 255 255 / 74%) 95%, transparent 100%),
+    radial-gradient(circle 1.5px at 57% 3%, rgb(255 255 255 / 68%) 95%, transparent 100%);
+  animation:
+    star-twinkle 12s ease-in-out -7s infinite alternate,
+    star-drift 52s ease-in-out -25s infinite alternate-reverse;
+}
+
+@keyframes star-twinkle {
+  0%,
+  100% {
+    opacity: 0.14;
+  }
+
+  50% {
+    opacity: 0.52;
+  }
+}
+
+@keyframes star-drift {
+  from {
+    transform: translate3d(0, 0, 0);
+  }
+
+  to {
+    transform: translate3d(12px, -9px, 0);
+  }
+}
+
+.content {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  max-width: 576px;
+}
+
+.hero {
+  margin-bottom: 64px;
+  text-align: center;
+}
+
+.hero h1 {
+  margin: 0;
+  font-size: 48px;
+  font-weight: 600;
+  line-height: 1;
+}
+
+.hero p {
+  max-width: 448px;
+  margin: 24px auto 0;
+  color: var(--muted);
+  font-size: 18px;
+  line-height: 1.625;
+}
+
+.section h2 {
+  margin: 0 0 20px;
+  color: var(--muted);
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 1.25;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.experience {
+  margin-bottom: 64px;
+}
+
+.community-list {
+  display: grid;
+  gap: 16px;
+}
+
+.community-card {
+  display: flex;
+  min-width: 0;
+  align-items: center;
+  gap: 20px;
+  padding: 20px;
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  background: var(--card);
+  transition: transform 240ms ease, border-color 240ms ease, background-color 240ms ease, box-shadow 240ms ease;
+}
+
+.community-card:hover,
+.founder-card:hover {
+  transform: translateY(-3px);
+  border-color: rgb(255 255 255 / 28%);
+  background: #2c2c2c;
+  box-shadow: 0 14px 36px rgb(0 0 0 / 32%);
+}
+
+.community-card-pending:hover {
+  transform: none;
+  border-color: var(--border);
+  background: var(--card);
+}
+
+.community-card:focus-visible,
+.founder-card:focus-visible,
+.footer a:focus-visible {
+  outline: 2px solid #fff;
+  outline-offset: 4px;
+}
+
+.community-image {
+  width: 64px;
+  height: 64px;
+  flex: 0 0 64px;
+  border-radius: 16px;
+  object-fit: cover;
+  transition: transform 240ms ease;
+}
+
+.community-card:hover .community-image {
+  transform: scale(1.045);
+}
+
+.community-image-contain {
+  object-fit: contain;
+}
+
+.community-monogram {
+  display: grid;
+  width: 64px;
+  height: 64px;
+  flex: 0 0 64px;
+  place-items: center;
+  border-radius: 16px;
+  background: #181818;
+  color: #b4b4b8;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.community-copy {
+  min-width: 0;
+  flex: 1;
+}
+
+.community-copy h3,
+.founder-card h3 {
+  margin: 0;
+  color: var(--foreground);
+  font-size: 18px;
+  font-weight: 600;
+  line-height: 1.45;
+}
+
+.community-copy h3 {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.community-copy p,
+.community-copy span {
+  display: block;
+  margin: 0;
+  color: var(--muted);
+}
+
+.community-copy p {
+  font-size: 16px;
+  line-height: 1.5;
+}
+
+.community-copy span {
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+.server-badge {
+  width: 20px;
+  height: 20px;
+  flex: 0 0 20px;
+  fill: #fff;
+  stroke: #fff;
+  stroke-width: 1.5;
+}
+
+.external-icon {
+  width: 24px;
+  height: 24px;
+  flex: 0 0 24px;
+  color: var(--muted);
+  transition: color 180ms ease, transform 180ms ease;
+}
+
+.community-card:hover .external-icon {
+  transform: translate(2px, -2px);
+  color: var(--foreground);
+}
+
+.founder-list {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
+}
+
+.founder-card {
+  display: flex;
+  min-width: 0;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  padding: 24px;
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  background: var(--card);
+  text-align: center;
+  transition: transform 240ms ease, border-color 240ms ease, background-color 240ms ease, box-shadow 240ms ease;
+}
+
+.founder-avatar {
+  position: relative;
+  display: grid;
+  width: 80px;
+  height: 80px;
+  flex: 0 0 80px;
+  place-items: center;
+  border-radius: 50%;
+  background: #181818;
+  transition: transform 240ms ease, box-shadow 240ms ease;
+}
+
+.founder-card:hover .founder-avatar {
+  transform: translateY(-2px) scale(1.04);
+  box-shadow: 0 8px 22px rgb(0 0 0 / 35%);
+}
+
+.founder-avatar img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  border-radius: inherit;
+  object-fit: cover;
+}
+
+.founder-avatar img[hidden] {
+  display: none;
+}
+
+.avatar-fallback {
+  color: #b4b4b8;
+  font-size: 24px;
+  font-weight: 600;
+}
+
+.presence-indicator {
+  position: absolute;
+  right: -1px;
+  bottom: -1px;
+  width: 18px;
+  height: 18px;
+  border: 3px solid var(--card);
+  border-radius: 50%;
+  background: #80848e;
+}
+
+.presence-indicator--online {
+  background: #23a55a;
+  animation: online-pulse 2.4s ease-out infinite;
+}
+
+@keyframes online-pulse {
+  0%,
+  100% {
+    box-shadow: 0 0 0 0 rgb(35 165 90 / 0%);
+  }
+
+  50% {
+    box-shadow: 0 0 0 5px rgb(35 165 90 / 18%);
+  }
+}
+
+.presence-indicator--idle {
+  background: #f0b232;
+}
+
+.presence-indicator--dnd {
+  background: #f23f43;
+}
+
+.profile-handle {
+  color: #c4c4c8 !important;
+}
+
+.founder-card p {
+  margin: 4px 0 0;
+  color: var(--muted);
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+.footer {
+  display: flex;
+  justify-content: center;
+  margin-top: 64px;
+}
+
+.footer a {
+  color: #555;
+  font-size: 12px;
+  transition: color 180ms ease;
+}
+
+.footer a:hover,
+.footer a:focus-visible {
+  color: #fff;
+}
+
+.motion-ready .reveal {
+  transform: translateY(10px);
+  opacity: 0;
+  transition: opacity 600ms ease, transform 600ms ease;
+}
+
+.motion-ready .reveal.is-visible {
+  transform: translateY(0);
+  opacity: 1;
+}
+
+.motion-ready .experience.is-visible .community-card,
+.motion-ready .founders.is-visible .founder-card {
+  animation: card-arrive 620ms cubic-bezier(0.2, 0.7, 0.2, 1) both;
+}
+
+.motion-ready .experience.is-visible .community-card:nth-child(2),
+.motion-ready .founders.is-visible .founder-card:nth-child(2) {
+  animation-delay: 90ms;
+}
+
+.motion-ready .experience.is-visible .community-card:nth-child(3) {
+  animation-delay: 180ms;
+}
+
+@keyframes card-arrive {
+  from {
+    filter: blur(4px);
+    opacity: 0;
+  }
+
+  to {
+    filter: blur(0);
+    opacity: 1;
+  }
+}
+
+.count-updated {
+  animation: count-change 420ms ease-out;
+}
+
+@keyframes count-change {
+  from {
+    opacity: 0.45;
+    transform: translateY(3px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (min-width: 640px) {
+  .hero h1 {
+    font-size: 60px;
+  }
+
+  .hero p {
+    font-size: 20px;
+  }
+}
+
+@media (max-width: 480px) {
+  .page {
+    padding: 88px 20px 72px;
+  }
+
+  .hero {
+    margin-bottom: 56px;
+  }
+
+  .hero h1 {
+    font-size: 42px;
+  }
+
+  .hero p {
+    font-size: 17px;
+  }
+
+  .community-card {
+    gap: 14px;
+    padding: 16px;
+  }
+
+  .community-image {
+    width: 56px;
+    height: 56px;
+    flex-basis: 56px;
+    border-radius: 14px;
+  }
+
+  .community-monogram {
+    width: 56px;
+    height: 56px;
+    flex-basis: 56px;
+    border-radius: 14px;
+  }
+
+  .community-copy h3,
+  .founder-card h3 {
+    font-size: 16px;
+  }
+
+  .community-copy p {
+    font-size: 14px;
+  }
+
+  .community-copy span {
+    font-size: 12px;
+  }
+
+  .external-icon {
+    width: 20px;
+    height: 20px;
+    flex-basis: 20px;
+  }
+
+  .founder-list {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    transition-duration: 0.01ms !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+  }
+
+  .motion-ready .reveal {
+    transform: none;
+    opacity: 1;
+  }
+
+  .starfield::before,
+  .starfield::after,
+  .motion-ready .experience.is-visible .community-card,
+  .motion-ready .founders.is-visible .founder-card,
+  .presence-indicator--online,
+  .count-updated {
+    animation: none !important;
+  }
+}

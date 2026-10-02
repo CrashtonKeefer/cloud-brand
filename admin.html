@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#000000" />
+    <title>Admin | Cloud Studios</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="admin.css" />
+    <script type="module" src="admin.js"></script>
+  </head>
+  <body>
+    <header class="admin-header">
+      <a class="wordmark" href="/" aria-label="Cloud Studios home">Cloud Studios</a>
+      <button class="quiet-button" id="logout-button" type="button" hidden>Sign out</button>
+    </header>
+
+    <main class="admin-main">
+      <div class="page-heading">
+        <p class="eyebrow">Site management</p>
+        <h1>Community cards</h1>
+        <p class="description">Edit the names, Discord invite codes, and logo paths shown on the public page.</p>
+      </div>
+
+      <section class="admin-panel" id="login-panel" aria-labelledby="login-title">
+        <div class="panel-heading">
+          <h2 id="login-title">Admin sign in</h2>
+        </div>
+        <form id="login-form" class="login-form">
+          <label for="admin-password">Password</label>
+          <input id="admin-password" name="password" type="password" autocomplete="current-password" required />
+          <button class="primary-button" type="submit">Sign in</button>
+        </form>
+      </section>
+
+      <section class="admin-panel" id="editor-panel" aria-labelledby="editor-title" hidden>
+        <div class="panel-heading">
+          <h2 id="editor-title">Communities</h2>
+          <button class="quiet-button" id="reload-button" type="button">Reload</button>
+        </div>
+        <form id="editor-form">
+          <div class="community-editor-list" id="community-editor-list"></div>
+          <div class="form-actions">
+            <button class="primary-button" type="submit">Save changes</button>
+          </div>
+        </form>
+      </section>
+
+      <p class="status-message" id="status-message" role="status" aria-live="polite"></p>
+    </main>
+
+    <template id="community-template">
+      <fieldset class="community-editor-row">
+        <legend data-community-name></legend>
+        <label>
+          Display name
+          <input data-field="name" type="text" maxlength="80" required />
+        </label>
+        <label>
+          Discord invite code
+          <input data-field="inviteCode" type="text" maxlength="64" pattern="[a-zA-Z0-9_-]{2,64}" required />
+        </label>
+        <label>
+          Logo path
+          <input data-field="logoPath" type="text" maxlength="2048" placeholder="assets/logo.png or leave blank for Discord icon" />
+        </label>
+      </fieldset>
+    </template>
+  </body>
+</html>
